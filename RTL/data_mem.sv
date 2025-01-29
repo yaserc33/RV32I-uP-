@@ -1,4 +1,4 @@
-typedef enum logic [2:0] {
+typedef enum logic [3:0] {
     LB,
     LH,
     LW,
@@ -6,7 +6,8 @@ typedef enum logic [2:0] {
     LHU,
     SB,
     SH,
-    SW
+    SW,
+    chilling 
 } memory_op_type;
 
 
@@ -25,7 +26,7 @@ module data_memory #(
 
     
     logic [31 :0] data_memory [0:size-1]; // data memory  with (size) location     --> log2(size+1) = log2(1024)=10 bit address
-    logic [$clog2(size)+1 :2] word_addr;    // 10 bit word locations + 2 bit for byte address = 12 bit total bit   --> [11:2] word _addr
+    logic [$clog2(size)-1 :0] word_addr;    // 10 bit word locations 
     logic [1:0]   byte_addr; 
 
 
@@ -43,7 +44,7 @@ module data_memory #(
         {7'b0000011, 3'b010}: memory_op = LW;
         {7'b0000011, 3'b100}: memory_op = LBU;
         {7'b0000011, 3'b101}: memory_op = LHU;
-        default: memory_op = LB; //avoid laches 
+        default: memory_op = chilling  ; 
     endcase
     end
 

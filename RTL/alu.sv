@@ -18,10 +18,16 @@ module alu #(parameter ALU_WIDTH = 32 )(
     output logic [ALU_WIDTH - 1:0] alu_out
 );
 
-    alu_op_t alu_op_e;
-    assign alu_op_e = alu_op_t'(alu_op); // type cast
+    alu_op_t alu_op_enum;
+    assign alu_op_enum = alu_op_t'(alu_op); // type cast
+    
+    
     always_comb begin 
-        case(alu_op_e) 
+
+        alu_out=0; // initial
+
+        case(alu_op_enum) 
+        
             ADD: alu_out = op1 + op2;
             SUB: alu_out = op1 - op2;
             AND: alu_out = op1 & op2;
@@ -32,7 +38,7 @@ module alu #(parameter ALU_WIDTH = 32 )(
             SRA: alu_out = ($signed(op1)) >>> (op2[$clog2(ALU_WIDTH)-1:0]);
             SLT: alu_out = op1 < op2;
             SLTU:alu_out = ($unsigned(op1)) < ($unsigned(op2));
-            default: ; // do nothing 
+          
         endcase
     end
  

@@ -17,9 +17,9 @@ module tb_ins_mem;
 
         #10 addr = 0;
 
-        #10 addr = 1;
+        #10 addr = 4;
 
-        #10 addr = 10;
+        #10 addr = 8;
 
 
 

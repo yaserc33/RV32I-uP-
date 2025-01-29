@@ -17,7 +17,7 @@ module reg_file #(parameter mode = 32 , reg_number =32) (
     always @(posedge clk, negedge reset_n) begin 
         
         if(~reset_n) begin 
-            for(int i = 1; i<reg_number; i=i+1)  
+            for(int i = 0; i<reg_number; i++)  
                 reg_file[i] <= 0;    
         end 
 
